@@ -1,1 +1,5 @@
 print("Hello world. This is my first pycharm file.")
+print("Second sentence.")
+print("Third sentence.")
+print("Fourth sentence.")
+print("Fifth sentence.")

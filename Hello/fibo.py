@@ -10,5 +10,11 @@ def fibon(n):
         new_list.append(sum)
     return new_list
 
+def sumn(list1):
+    sum = 0
+    for i in range(0, len(list1)):
+        sum += int(list1[i])
+    return sum
+
 print("The first 11 fibonacci numbers are : " , fibon(11))
-print("The first 15 fibonacci numbers are : " , fibon(15))
+print("The sum of the first 5 fibon numbers is : " , sumn(fibon(5)))

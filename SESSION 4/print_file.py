@@ -4,7 +4,8 @@ from pathlib import Path
 FILENAME = "RNU6_269P.txt"
 
 # -- Open and read the file
-file_contents = Path(FILENAME).read_text()
+text = Path(FILENAME).read_text()
+lines = text.split("\n")
+print(lines[0])
 
-# -- Print the contents on the console
-print(file_contents)
+

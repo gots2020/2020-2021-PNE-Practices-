@@ -3,7 +3,7 @@ import seq0
 FOLDER = "./sequences/"
 ID = "U5.txt"
 
-print("-----| Exercise 6 |------")
+print("-----| Exercise 7 |------")
 
 U5_seq = seq0.seq_read_fasta(FOLDER + ID)
 first_20_bases = U5_seq[0:20]

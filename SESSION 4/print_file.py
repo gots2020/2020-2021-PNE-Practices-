@@ -1,11 +1,11 @@
-from pathlib import Path
-
-# -- Constant with the new of the file to open
-FILENAME = "../P0/RNU6_269P.txt"
+FILENAME = "RNU6_269P.txt"
+GENE_FOLDER = "../P0/sequences/"
 
 # -- Open and read the file
-text = Path(FILENAME).read_text()
-lines = text.split("\n")
-print(lines[0])
+with open(GENE_FOLDER + FILENAME) as f:
+    text = f.read()
+    lines = text.split("\n")
+    print(lines[0])
+
 
 

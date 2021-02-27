@@ -27,3 +27,10 @@ def seq_count(seq):
         elif e == "T":
             t += 1
     return {"A": a, "C": c, "G": g, "T": t}
+
+def seq_reverse(seq):
+    new_string = ""
+    for i in range(0, len(seq)):
+        new_string += seq[len(seq) - 1 - i]
+    return new_string
+

@@ -46,3 +46,21 @@ def seq_complement(seq):
         elif e == "T":
             new_string += "A"
     return new_string
+
+def frequency_base(seq):
+    a, c, g, t = 0, 0, 0, 0
+    for e in seq :
+        if e == "A":
+            a += 1
+        elif e == "C":
+            c += 1
+        elif e == "G":
+            g += 1
+        elif e == "T":
+            t += 1
+    new_dict = {"A": a, "C": c, "G": g, "T": t}
+    number_most_frequent = max(new_dict.values())
+    for k, v in new_dict.items():
+        if v == number_most_frequent:
+            most_frequent_base = k
+    return most_frequent_base

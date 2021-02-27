@@ -34,3 +34,15 @@ def seq_reverse(seq):
         new_string += seq[len(seq) - 1 - i]
     return new_string
 
+def seq_complement(seq):
+    new_string = ""
+    for e in seq:
+        if e == "A":
+            new_string += "T"
+        elif e == "C":
+            new_string += "G"
+        elif e == "G":
+            new_string += "C"
+        elif e == "T":
+            new_string += "A"
+    return new_string

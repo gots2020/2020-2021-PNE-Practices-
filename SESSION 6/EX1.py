@@ -1,17 +1,16 @@
-import termcolor
-termcolor.cprint("Hey, this message is printed in green", "green")
-
-
 class Seq:
     """A class for representing sequences"""
 
     def __init__(self, strbases):
+        for c in strbases:
+            if c != "A" and c != "C" and c != "G" and c != "T" :
+                self.strbases = "ERROR"
+                print("ERROR!!")
+                break
+            else:
+                self.strbases = strbases
+    print("New sequence created.")
 
-        # Initialize the sequence with the value
-        # passed as argument when creating the object
-        self.strbases = strbases
-
-        print("New sequence created!")
 
     def __str__(self):
         """Method called when the object is being printed"""
@@ -29,23 +28,16 @@ class Gene(Seq):
        the methods from the Seq class
     """
     def __init__(self, strbases, name=""):
-
-        # -- Call first the Seq initilizer and then the
-        # -- Gene init method
         super().__init__(strbases)
         self.name = name
         print("New gene created")
 
     def __str__(self):
         """Print the Gene name along with the sequence"""
-        return self.name + "-" + self.strbases
+        return self.strbases
 
-# --- Main program
-s1 = Seq("AGTACACTGGT")
-g = Gene("CGTAAC")
 
-# -- Printing the objects
+s1 = Seq("ACCTGC")
+s2 = Seq("Hello? Am I a valid sequence?")
 print(f"Sequence 1: {s1}")
-print(f"  Length: {s1.len()}")
-print(f"Sequence 2: {g}")
-print(f"  Length: {g.len()}")
+print(f"Sequence 2: {s2}")

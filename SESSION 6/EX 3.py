@@ -23,16 +23,15 @@ class Seq:
 
 def generate_seqs(pattern, number):
     new_list = []
-    for i in range(0, number ):
+    for i in range(0, number):
         element = Seq(pattern + i*pattern)
         new_list.append(element)
     return new_list
 
 def print_seqs(seq_list):
-    counter = -1
-    for seq in seq_list :
-        counter += 1
-        print("Sequence ", counter, ": ", f"(Length: {seq.len()})", f"{seq}")
+    for i in range(0, len(seq_list)) :
+        termcolor.cprint(f"Sequence {i}: (Length: {seq_list[i].len()}) {seq_list[i]}", "blue")
+
 
 
 seq_list1 = generate_seqs("A", 3)

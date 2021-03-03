@@ -1,3 +1,5 @@
+import termcolor
+
 class Seq:
     """A class for representing sequences"""
 
@@ -5,11 +7,11 @@ class Seq:
         for c in strbases:
             if c != "A" and c != "C" and c != "G" and c != "T" :
                 self.strbases = "ERROR"
-                print("ERROR!!")
+                termcolor.cprint("ERROR!!", "red")
                 break
             else:
                 self.strbases = strbases
-    print("New sequence created.")
+    termcolor.cprint("New sequence created.", "green")
 
 
     def __str__(self):

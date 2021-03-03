@@ -21,6 +21,13 @@ class Seq:
         """Calculate the length of the sequence"""
         return len(self.strbases)
 
+def generate_seqs(pattern, number):
+    new_list = []
+    for i in range(0, number ):
+        element = Seq(pattern + i*pattern)
+        new_list.append(element)
+    return new_list
+
 def print_seqs(seq_list):
     counter = -1
     for seq in seq_list :
@@ -28,6 +35,11 @@ def print_seqs(seq_list):
         print("Sequence ", counter, ": ", f"(Length: {seq.len()})", f"{seq}")
 
 
-seq_list = [Seq("ACT"), Seq("GATA"), Seq("CAGATA")]
+seq_list1 = generate_seqs("A", 3)
+seq_list2 = generate_seqs("AC", 5)
 
-print_seqs(seq_list)
+termcolor.cprint("\nList 1:", "blue")
+print_seqs(seq_list1)
+
+termcolor.cprint("\nList 2:", "blue")
+print_seqs(seq_list2)

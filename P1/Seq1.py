@@ -1,4 +1,5 @@
 import termcolor
+from pathlib import Path
 
 class Seq:
     """A class for representing sequences"""
@@ -46,3 +47,94 @@ class Seq:
     def print_seqs(seq_list):
         for i in range(0, len(seq_list)) :
             termcolor.cprint(f"Sequence {i}: (Length: {seq_list[i].len()}) {seq_list[i]}", "blue")
+
+    def count_bases(self):
+        a, c, g, t = 0, 0, 0, 0
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            pass
+        else:
+            for e in self.strbases:
+                if e == "A":
+                    a += 1
+                elif e == "C":
+                    c += 1
+                elif e == "G":
+                    g += 1
+                elif e == "T":
+                    t += 1
+        return a, c, g, t
+
+    @staticmethod
+    def print_count_bases(bases):
+        print("A: ", bases[0], ",", " C: ", bases[1], ",", " G: ", bases[2], ",",  " T: ", bases[3])
+
+    def count(self):
+        a, c, g, t = 0, 0, 0, 0
+        if self.strbases == "NULL" or self.strbases == "ERROR":
+            pass
+        else:
+            for e in self.strbases:
+                if e == "A":
+                    a += 1
+                elif e == "C":
+                    c += 1
+                elif e == "G":
+                    g += 1
+                elif e == "T":
+                    t += 1
+        return {"A": a , "C": c, "G": g, "T": t}
+
+    def reverse(self):
+        rev_seq = ""
+        if self.strbases == "NULL":
+            rev_seq = "NULL"
+        elif self.strbases == "ERROR":
+            rev_seq = "ERROR"
+        else:
+            for i in range(0, len(self.strbases)):
+                rev_seq += self.strbases[len(self.strbases) - 1 - i]
+        return rev_seq
+
+    def complement(self):
+        comp_seq = ""
+        if self.strbases == "NULL":
+            comp_seq = "NULL"
+        elif self.strbases == "ERROR":
+            comp_seq = "ERROR"
+        else :
+            for e in self.strbases:
+                if e == "A":
+                    comp_seq += "T"
+                elif e == "T":
+                    comp_seq += "A"
+                elif e == "G":
+                    comp_seq += "C"
+                elif e == "C":
+                    comp_seq += "G"
+        return comp_seq
+
+    @staticmethod
+    def take_out_first_line(seq):
+        return seq[seq.find("\n") + 1:].replace("\n", "")
+
+    def read_fasta(self, filename):
+        self.strbases = Seq.take_out_first_line(Path(filename).read_text())
+        return self.strbases
+
+    def frequency_base(self):
+        a, c, g, t = 0, 0, 0, 0
+        for e in self.strbases:
+            if e == "A":
+                a += 1
+            elif e == "C":
+                c += 1
+            elif e == "G":
+                g += 1
+            elif e == "T":
+                t += 1
+        new_dict = {"A": a, "C": c, "G": g, "T": t}
+        number_most_frequent = max(new_dict.values())
+        for k, v in new_dict.items():
+            if v == number_most_frequent:
+                most_frequent_base = k
+        return most_frequent_base

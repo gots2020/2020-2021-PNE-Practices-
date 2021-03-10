@@ -50,9 +50,7 @@ class Seq:
 
     def count_bases(self):
         a, c, g, t = 0, 0, 0, 0
-        if self.strbases == "NULL" or self.strbases == "ERROR":
-            pass
-        else:
+        if not (self.strbases == "NULL") and not (self.strbases == "ERROR"):
             for e in self.strbases:
                 if e == "A":
                     a += 1

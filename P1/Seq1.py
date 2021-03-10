@@ -3,9 +3,10 @@ from pathlib import Path
 
 class Seq:
     """A class for representing sequences"""
-
-    def __init__(self, strbases="NULL"):
-        if strbases == "NULL":
+    NULL_SEQUENCE = "NULL"
+    INVALID_SEQUENCE = "ERROR"
+    def __init__(self, strbases=NULL_SEQUENCE):
+        if strbases == Seq.NULL_SEQUENCE:
             termcolor.cprint("NULL Seq created.", "yellow")
             self.strbases = strbases
         else:
@@ -13,7 +14,7 @@ class Seq:
                 termcolor.cprint("New sequence created.", "green")
                 self.strbases = strbases
             else:
-                self.strbases = "ERROR"
+                self.strbases = Seq.INVALID_SEQUENCE
                 termcolor.cprint("ERROR!! Incorrect sequence.", "red")
 
     def __str__(self):
@@ -24,7 +25,7 @@ class Seq:
 
     def len(self):
         """Calculate the length of the sequence"""
-        if self.strbases == "NULL" or self.strbases == "ERROR":
+        if self.strbases == Seq.NULL_SEQUENCE or self.strbases == Seq.INVALID_SEQUENCE:
             return 0
         else:
             return len(self.strbases)
@@ -50,7 +51,7 @@ class Seq:
 
     def count_bases(self):
         a, c, g, t = 0, 0, 0, 0
-        if not (self.strbases == "NULL") and not (self.strbases == "ERROR"):
+        if not (self.strbases == Seq.NULL_SEQUENCE) and not (self.strbases == Seq.INVALID_SEQUENCE):
             for e in self.strbases:
                 if e == "A":
                     a += 1
@@ -68,7 +69,7 @@ class Seq:
 
     def count(self):
         a, c, g, t = 0, 0, 0, 0
-        if self.strbases == "NULL" or self.strbases == "ERROR":
+        if self.strbases == Seq.NULL_SEQUENCE or self.strbases == Seq.INVALID_SEQUENCE:
             pass
         else:
             for e in self.strbases:
@@ -84,10 +85,10 @@ class Seq:
 
     def reverse(self):
         rev_seq = ""
-        if self.strbases == "NULL":
-            rev_seq = "NULL"
-        elif self.strbases == "ERROR":
-            rev_seq = "ERROR"
+        if self.strbases == Seq.NULL_SEQUENCE:
+            rev_seq = Seq.NULL_SEQUENCE
+        elif self.strbases == Seq.INVALID_SEQUENCE:
+            rev_seq = Seq.INVALID_SEQUENCE
         else:
             for i in range(0, len(self.strbases)):
                 rev_seq += self.strbases[len(self.strbases) - 1 - i]
@@ -95,10 +96,10 @@ class Seq:
 
     def complement(self):
         comp_seq = ""
-        if self.strbases == "NULL":
-            comp_seq = "NULL"
-        elif self.strbases == "ERROR":
-            comp_seq = "ERROR"
+        if self.strbases == Seq.NULL_SEQUENCE:
+            comp_seq = Seq.NULL_SEQUENCE
+        elif self.strbases == Seq.INVALID_SEQUENCE:
+            comp_seq = Seq.INVALID_SEQUENCE
         else :
             for e in self.strbases:
                 if e == "A":

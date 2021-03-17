@@ -7,7 +7,7 @@ class Seq:
     INVALID_SEQUENCE = "ERROR"
     def __init__(self, strbases=NULL_SEQUENCE):
         if strbases == Seq.NULL_SEQUENCE:
-            termcolor.cprint("NULL Seq created.", "yellow")
+            print("NULL Seq created.")
             self.strbases = strbases
         else:
             if Seq.correct_seq2(strbases):

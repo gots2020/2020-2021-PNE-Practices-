@@ -1,13 +1,15 @@
 import termcolor
 from pathlib import Path
+import colorama
 
 class Seq:
     """A class for representing sequences"""
     NULL_SEQUENCE = "NULL"
     INVALID_SEQUENCE = "ERROR"
     def __init__(self, strbases=NULL_SEQUENCE):
+        colorama.init(strip='False')
         if strbases == Seq.NULL_SEQUENCE:
-            print("NULL Seq created.")
+            print(termcolor.colored("NULL Seq created.", 'yellow'))
             self.strbases = strbases
         else:
             if Seq.correct_seq2(strbases):

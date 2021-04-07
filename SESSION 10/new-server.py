@@ -46,12 +46,8 @@ while True:
 
         # -- Print the received message
         print(f"Message received: {msg}")
-
-        try:
-            response = int(msg) ** int(msg)
-            cs.send(str(response).encode())
-        except ValueError:
-            cs.send("We need a number".encode())
+        response = "ECHO: " + msg
+        cs.send(str(response).encode())
         cs.close()
         if count_connections == 5:
             for i in range(0, len(client_address_list)):

@@ -24,8 +24,14 @@ def process_client(s):
 
     # -- The request line is the first
     req_line = lines[0]
-    path_name = req_line.split(' ')[1]
-    print("Request line: ", req_line)
+    request = req_line.split(' ')[1]
+    path_name = request.split("?")[0]
+    try:
+        parameters = request.split("?")[1]
+        print("Arguments", parameters)
+    except IndexError:
+        pass
+    print("Resource requested: ", path_name)
     termcolor.cprint(req_line, "green")
 
     # -- Generate the response message
@@ -36,8 +42,6 @@ def process_client(s):
     # Body (content to send)
 
     # This new contents are written in HTML language
-    body = """
-    """
     # -- Status line: We respond that everything is ok (200 code)
     status_line = "HTTP/1.1 200 OK\n"
 

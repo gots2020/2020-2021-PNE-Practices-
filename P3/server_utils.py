@@ -1,6 +1,4 @@
-from P1 import Seq1
 from Seq1 import Seq
-from P1 import sequences
 
 def print_colored(message, color):
     import termcolor
@@ -64,4 +62,6 @@ def gene(cs, argument):
         response = "File not found."
         print(response)
         cs.send(response.encode())
+
+
 

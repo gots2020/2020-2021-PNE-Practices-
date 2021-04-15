@@ -51,6 +51,10 @@ while True:
         server_utils.get(cs, list_sequences, argument)
     elif command == "INFO":
         server_utils.info(cs, argument)
+    elif command == "COMP":
+        server_utils.comp(cs, argument)
+    elif command == "REV":
+        server_utils.rev(cs, argument)
     else:
         response = "Not available command."
         cs.send(str(response).encode())

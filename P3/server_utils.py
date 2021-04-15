@@ -38,4 +38,17 @@ def info(cs, sequence):
     print(response)
     cs.send(response.encode())
 
+def comp(cs, sequence):
+    print_colored("COMP", "yellow")
+    s = Seq(sequence)
+    response = s.complement()
+    print(response)
+    cs.send(response.encode())
+
+def rev(cs,sequence):
+    print_colored("REV", "yellow")
+    s = Seq(sequence)
+    response = s.reverse()
+    print(response)
+    cs.send(response.encode())
 

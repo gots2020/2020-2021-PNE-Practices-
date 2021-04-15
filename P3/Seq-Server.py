@@ -49,6 +49,8 @@ while True:
         server_utils.ping(cs)
     elif command == "GET":
         server_utils.get(cs, list_sequences, argument)
+    elif command == "INFO":
+        server_utils.info(cs, argument)
     else:
         response = "Not available command."
         cs.send(str(response).encode())

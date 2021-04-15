@@ -125,3 +125,12 @@ class Seq:
             if v == number_most_frequent:
                 most_frequent_base = k
         return most_frequent_base
+
+    def percentage_bases(self):
+        if self.len() != 0:
+            percentage_a = self.count_bases()[0] * 100/ self.len()
+            percentage_c = self.count_bases()[1] * 100 / self.len()
+            percentage_g = self.count_bases()[2] * 100 / self.len()
+            percentage_t = self.count_bases()[3] * 100 / self.len()
+            return percentage_a, percentage_c, percentage_g, percentage_t
+

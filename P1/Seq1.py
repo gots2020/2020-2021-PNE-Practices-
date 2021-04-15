@@ -7,15 +7,15 @@ class Seq:
     INVALID_SEQUENCE = "ERROR"
     def __init__(self, strbases=NULL_SEQUENCE):
         if strbases == Seq.NULL_SEQUENCE:
-            termcolor.cprint("NULL Seq created.", "yellow")
+            print("NULL Seq created.")
             self.strbases = strbases
         else:
             if Seq.correct_seq2(strbases):
-                termcolor.cprint("New sequence created.", "green")
+                print("New sequence created.")
                 self.strbases = strbases
             else:
                 self.strbases = Seq.INVALID_SEQUENCE
-                termcolor.cprint("ERROR!! Incorrect sequence.", "red")
+                print("ERROR!! Incorrect sequence.")
 
     def __str__(self):
         """Method called when the object is being printed"""

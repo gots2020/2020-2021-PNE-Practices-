@@ -1,6 +1,6 @@
 from P1 import Seq1
 from Seq1 import Seq
-
+from P1 import sequences
 
 def print_colored(message, color):
     import termcolor
@@ -51,4 +51,17 @@ def rev(cs,sequence):
     response = s.reverse()
     print(response)
     cs.send(response.encode())
+
+def gene(cs, argument):
+    s = Seq()
+    filename = "../P1/sequences/" + argument + ".txt"
+    print_colored("GENE", "yellow")
+    try:
+        response = s.read_fasta(filename)
+        print(response)
+        cs.send(response.encode())
+    except FileNotFoundError:
+        response = "File not found."
+        print(response)
+        cs.send(response.encode())
 

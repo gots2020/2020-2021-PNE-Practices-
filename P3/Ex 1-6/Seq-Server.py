@@ -44,21 +44,23 @@ while True:
     else:
         command = formatted_message[0]
         argument = formatted_message[1]
-
-    if command == "PING":
-        server_utils.ping(cs)
-    elif command == "GET":
-        server_utils.get(cs, list_sequences, argument)
-    elif command == "INFO":
-        server_utils.info(cs, argument)
-    elif command == "COMP":
-        server_utils.comp(cs, argument)
-    elif command == "REV":
-        server_utils.rev(cs, argument)
-    elif command == "GENE":
-        server_utils.gene(cs, argument)
-    else:
-        response = "Not available command."
-        cs.send(str(response).encode())
+    try:
+        if command == "PING":
+            server_utils.ping(cs)
+        elif command == "GET":
+            server_utils.get(cs, list_sequences, argument)
+        elif command == "INFO":
+            server_utils.info(cs, argument)
+        elif command == "COMP":
+            server_utils.comp(cs, argument)
+        elif command == "REV":
+            server_utils.rev(cs, argument)
+        elif command == "GENE":
+            server_utils.gene(cs, argument)
+        else:
+            response = "Not available command."
+            cs.send(str(response).encode())
+    except NameError:
+        print("An argument after the command ", command, " is needed!!!")
     cs.close()
 

@@ -28,7 +28,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         # Read the index from the file
         print(self.path)
         if self.path == "/":
-            contents = Path(HTML_ASSETS + '/form-1.html').read_text()
+            contents = Path(HTML_ASSETS + '/form1.html').read_text()
         elif self.path.startswith("/echo"):
             message = parse_qs(urlparse(self.path).query)['msg'][0]
             print(message)

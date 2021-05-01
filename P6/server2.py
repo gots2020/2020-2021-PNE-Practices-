@@ -63,7 +63,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             contents = su.read_template_html_file("./HTML/INDEX.html").render(context=context)
         elif path_name == "/test":
             contents = su.read_template_html_file("./HTML/test.html").render()
-        elif path_name =="/ping":
+        elif path_name == "/ping":
             contents = su.read_template_html_file("./HTML/ping.html").render()
         elif path_name == "/get":
             number_sequence = arguments["sequence"][0]
@@ -72,8 +72,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             gene = arguments["gene"][0]
             contents = su.gene(gene)
         elif path_name == "/operation":
-            sequence = arguments["sequence"][0]
-            operation = arguments["calculation"][0]
+            try:
+                sequence = arguments["sequence"][0]
+                operation = arguments["calculation"][0]
+                if operation == "Rev":
+                    contents = su.rev(sequence)
+                elif operation == "Comp":
+                    contents = su.comp(sequence)
+                elif operation == "Info":
+                    contents = su.info(sequence)
+            except KeyError:
+                contents = su.read_template_html_file("./HTML/error_operation.html").render()
         else:
             contents = su.read_template_html_file("./HTML/ERROR.html").render()
 
@@ -110,5 +119,5 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
         httpd.serve_forever()
     except KeyboardInterrupt:
         print("")
-        print("Stoped by the user")
+        print("Stopped by the user")
         httpd.server_close()

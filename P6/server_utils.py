@@ -1,6 +1,7 @@
 from Seq1 import Seq
 import jinja2
 import pathlib
+
 def print_colored(message, color):
     import termcolor
     import colorama

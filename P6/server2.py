@@ -61,8 +61,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             context["n_sequences"] = len(LIST_SEQUENCES)
             context["list_genes"] = LIST_GENES
             contents = su.read_template_html_file("./HTML/INDEX.html").render(context=context)
-        elif path_name == "/test":
-            contents = su.read_template_html_file("./HTML/test.html").render()
         elif path_name == "/ping":
             contents = su.read_template_html_file("./HTML/ping.html").render()
         elif path_name == "/get":

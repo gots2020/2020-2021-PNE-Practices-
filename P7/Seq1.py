@@ -128,11 +128,11 @@ class Seq:
                 most_frequent_base = k
         return most_frequent_base
 
-    def percentage_base(self):
+    def percentage_base_and_count(self):
         a, c, g, t = self.count_bases()
         if self.len() != 0:
             p_a = round(a * 100 / self.len(), 1)
             p_c = round(c * 100 / self.len(), 1)
             p_g = round(g * 100 / self.len(), 1)
             p_t = round(t * 100 / self.len(), 1)
-        return {"A: ": str(p_a) + "%", "C: ": str(p_c) + "%", "G: ": str(p_g) + "%", "T: ": str(p_t) + "%"}
+        return {"A": ": " + str(a) + " (" + str(p_a) + "%)", "C": ": " + str(c) + " (" + str(p_c) + "%)", "G": ": " + str(g) + " (" + str(p_g) + "%)", "T": ": " + str(t) + " (" + str(p_t) + "%)"}

@@ -31,12 +31,13 @@ try:
         response = connection.getresponse()
         if response.status == 200:
             response_dict = json.loads(response.read().decode())
-            #print(json.dumps(response_dict, indent=4, sort_keys=True))
+            #response = json.dumps(response_dict, indent=4, sort_keys=True
             sequence = Seq1.Seq(response_dict["seq"])
             s_length = sequence.len()
-            percentages = sequence.percentage_base()
+            percentages = sequence.percentage_base_and_count()
             most_frequent_base = sequence.frequency_base()
             print_colored("Gene: ", key, "yellow")
+            print_colored("Description: ", response_dict['desc'], "yellow")
             print_colored("Total length: ", s_length, "yellow")
             for key, value in percentages.items():
                 print_colored(key, value, "blue")

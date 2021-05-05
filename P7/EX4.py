@@ -36,7 +36,7 @@ try:
         #print(json.dumps(response_dict, indent=4, sort_keys=True))
         sequence = Seq1.Seq(response_dict["seq"])
         s_length = sequence.len()
-        percentages = sequence.percentage_base()
+        percentages = sequence.percentage_base_and_count()
         most_frequent_base = sequence.frequency_base()
         print_colored("Gene: ", user_gene, "yellow")
         print_colored("Total length: ", s_length, "yellow")

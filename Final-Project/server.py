@@ -52,24 +52,43 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 response_dict = json.loads(response.read().decode())
                 count = len(response_dict["species"])
                 new_list = []
-                if 0 <= int(arguments["limit"][0]) <= 310:
-                    for i in range(0, int(arguments["limit"][0])):
-                        new_list.append(response_dict["species"][i]["common_name"])
-                    context = {"Total_seq": count,
-                               "limit": arguments["limit"][0],
-                               "names_seq": new_list}
-                    contents = read_template_html_file("./HTML/listSpecies.html").render(context=context)
-                elif int(arguments["limit"][0]) > 310:
+                try:
+                    if 0 <= int(arguments["limit"][0]) <= 310:
+                        for i in range(0, int(arguments["limit"][0])):
+                            new_list.append(response_dict["species"][i]["common_name"])
+                        context = {"Total_seq": count,
+                                   "limit": arguments["limit"][0],
+                                   "names_seq": new_list}
+                        contents = read_template_html_file("./HTML/listSpecies.html").render(context=context)
+                    elif int(arguments["limit"][0]) > 310:
+                        for i in range(0, 310):
+                            new_list.append(response_dict["species"][i]["common_name"])
+                        context = {"Total_seq": count,
+                                   "limit": arguments["limit"][0],
+                                   "names_seq": new_list}
+                        contents = read_template_html_file("./HTML/listSpecies.html").render(context=context)
+                    else:
+                        contents = read_template_html_file("./HTML/error_limit.html").render()
+                except KeyError:
                     for i in range(0, 310):
                         new_list.append(response_dict["species"][i]["common_name"])
                     context = {"Total_seq": count,
-                               "limit": arguments["limit"][0],
+                               "limit": "None",
                                "names_seq": new_list}
                     contents = read_template_html_file("./HTML/listSpecies.html").render(context=context)
-                else:
-                    contents = read_template_html_file("./HTML/error_limit.html").render()
             except ValueError:
                 contents = read_template_html_file("./HTML/error_limit.html").render()
+        elif path_name == "/karyotype":
+            specie = arguments["species"][0]
+            ENDPOINT = "/info/assembly/" + specie
+            connection.request("GET", ENDPOINT + PARAMETERS)
+            response = connection.getresponse()
+            if response.status == 200:
+                response_dict = json.loads(response.read().decode())
+                context = {"Chromosome_names": response_dict["karyotype"]}
+                contents = read_template_html_file("./HTML/karyotype.html").render(context=context)
+            else:
+                contents = read_template_html_file("./HTML/error_specie.html").render()
         else:
             contents = read_template_html_file("./HTML/error.html").render()
 

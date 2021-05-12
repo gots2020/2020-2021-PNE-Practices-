@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="UTF-8">
+        <title>KARYOTYPE OF A SPECIFIC SPECIE</title>
+    </head>
+    <body style="background-color: lightblue;">
+        The names of the chromosomes are : <br>
+        {% for chromosome in context.Chromosome_names %}
+            {{chromosome}}<br>
+        {% endfor %}
+        <br>
+        <a href="/">Main page</a>
+    <body>
+<html>

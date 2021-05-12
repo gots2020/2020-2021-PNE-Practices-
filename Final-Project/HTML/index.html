@@ -21,21 +21,51 @@
             2)Information about the karyotype:
             <br>
             <br>
-            Select the species: <input type="text" name="species">
+            Select the species: <input type="text" name="specie">
             <br>
             <br>
             <input type="submit" value="Send">
             <br>
         </form>
-        <form action="ping" method="get">
+        <form action="chromosomeLength" method="get">
             <br>
             3)Chromosome Length
             <br>
             <br>
-            Select the species: <input type="text" name="species">
+            Select the species: <input type="text" name="specie">
             <br>
             <br>
-            Select a chromosome: <input type="text" name="chromosome">
+            Select a chromosome: <input type="text" name="chromo">
+            <br>
+            <br>
+            <input type="submit" value="Send">
+        </form>
+        <form action="geneSeq" method="get">
+            <br>
+            4)Return the sequence of a human gene:
+            <br>
+            <br>
+            Select the human gene: <input type="text" name="gene">
+            <br>
+            <br>
+            <input type="submit" value="Send">
+        </form>
+        <form action="geneInfo" method="get">
+            <br>
+            5)Return information about a human gene:
+            <br>
+            <br>
+            Select the human gene: <input type="text" name="gene">
+            <br>
+            <br>
+            <input type="submit" value="Send">
+        </form>
+        <form action="geneCalc" method="get">
+            <br>
+            6)Total length and percentage of human gene bases:
+            <br>
+            <br>
+            Select the human gene: <input type="text" name="gene">
             <br>
             <br>
             <input type="submit" value="Send">

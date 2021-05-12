@@ -34,8 +34,10 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         path_name = o.path
         arguments = parse_qs(o.query)
 
+
         print("Resource requested: ", path_name)
         print("Parameters:", arguments)
+
 
         SERVER = "rest.ensembl.org"
         PARAMETERS = "?content-type=application/json"
@@ -79,7 +81,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             except ValueError:
                 contents = read_template_html_file("./HTML/error_limit.html").render()
         elif path_name == "/karyotype":
-            specie = arguments["species"][0]
+            specie = arguments["specie"][0].replace(" ", "_")
             ENDPOINT = "/info/assembly/" + specie
             connection.request("GET", ENDPOINT + PARAMETERS)
             response = connection.getresponse()
@@ -88,6 +90,23 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 context = {"Chromosome_names": response_dict["karyotype"]}
                 contents = read_template_html_file("./HTML/karyotype.html").render(context=context)
             else:
+                contents = read_template_html_file("./HTML/error_specie.html").render()
+        elif path_name == "/chromosomeLength":
+            try:
+                specie = arguments["specie"][0].replace(" ", "_")
+                ENDPOINT = "/info/assembly/" + specie
+                connection.request("GET", ENDPOINT + PARAMETERS)
+                response = connection.getresponse()
+                if response.status == 200:
+                    response_dict = json.loads(response.read().decode())
+                    new_list = response_dict["top_level_region"]
+                    for d in new_list:
+                        if d["name"] == arguments["chromo"][0]:
+                            context = {"Chromosome_length": d["length"]}
+                    contents = read_template_html_file("./HTML/chromosomeLength.html").render(context=context)
+                else:
+                    contents = read_template_html_file("./HTML/error_specie.html").render()
+            except KeyError:
                 contents = read_template_html_file("./HTML/error_specie.html").render()
         else:
             contents = read_template_html_file("./HTML/error.html").render()

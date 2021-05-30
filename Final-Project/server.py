@@ -116,7 +116,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     for d in new_list:
                         if d["name"] == arguments["chromo"][0]:
                             context = {"Chromosome_length": d["length"]}
-                    contents = read_template_html_file("./HTML/chromosomeLength.html").render(context=context)
+                            contents = read_template_html_file("./HTML/chromosomeLength.html").render(context=context)
+                        else:
+                            contents = read_template_html_file("HTML/error_chromosome.html").render()
                 else:
                     contents = read_template_html_file("HTML/error_specie.html").render()
             except KeyError:

@@ -103,7 +103,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                 context = {"Chromosome_names": response_dict["karyotype"]}
                 contents = read_template_html_file("./HTML/karyotype.html").render(context=context)
             else:
-                contents = read_template_html_file("HTML/error_specie.html").render()
+                contents = read_template_html_file("./HTML/error_specie.html").render()
         elif path_name == "/chromosomeLength":
             try:
                 specie = arguments["specie"][0].replace(" ", "_")
@@ -118,11 +118,11 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             context = {"Chromosome_length": d["length"]}
                             contents = read_template_html_file("./HTML/chromosomeLength.html").render(context=context)
                         else:
-                            contents = read_template_html_file("HTML/error_chromosome.html").render()
+                            contents = read_template_html_file("./HTML/error_chromosome.html").render()
                 else:
-                    contents = read_template_html_file("HTML/error_specie.html").render()
+                    contents = read_template_html_file("./HTML/error_specie.html").render()
             except KeyError:
-                contents = read_template_html_file("HTML/error_specie.html").render()
+                contents = read_template_html_file("./HTML/error_specie.html").render()
         elif path_name == "/geneSeq":
             try:
                 gene = arguments["gene"][0].replace(" ", "_")
@@ -135,9 +135,9 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     context = {"sequence": response_dict["seq"]}
                     contents = read_template_html_file("./HTML/gene_seq.html").render(context=context)
                 else:
-                    contents = read_template_html_file("HTML/error_gene.html").render()
+                    contents = read_template_html_file("./HTML/error_gene.html").render()
             except KeyError:
-                contents = read_template_html_file("HTML/error_gene.html").render()
+                contents = read_template_html_file("./HTML/error_gene.html").render()
         elif path_name == "/geneInfo":
             try:
                 gene = arguments["gene"][0].replace(" ", "_")
@@ -154,7 +154,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                "length": length_gene, "id": id, "chromosome_name": info_data_gene[2]}
                     contents = read_template_html_file("./HTML/gene_info.html").render(context=context)
             except KeyError:
-                contents = read_template_html_file("HTML/error_gene.html").render()
+                contents = read_template_html_file("./HTML/error_gene.html").render()
         elif path_name == "/geneCalc":
             try:
                 gene = arguments["gene"][0].replace(" ", "_")
@@ -170,7 +170,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                "G": percentages["G"], "T": percentages["T"]}
                     contents = read_template_html_file("./HTML/gene_calc.html").render(context=context)
             except KeyError:
-                contents = read_template_html_file("HTML/error_gene.html").render()
+                contents = read_template_html_file("./HTML/error_gene.html").render()
         else:
             contents = read_template_html_file("./HTML/error.html").render()
 

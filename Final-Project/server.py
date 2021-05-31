@@ -67,7 +67,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                                             "5. Return information about a human gene:",
                                             "6. Total length and percentage of human gene bases:"]
                            }
-                contents = str(context)
+                contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 contents = read_template_html_file("./HTML/index.html").render()
@@ -88,24 +88,24 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                             context = {"Total_seq": count,
                                        "limit": arguments["limit"][0],
                                        "names_seq": new_list}
-                            contents = str(context)
+                            contents = json.dumps(context, indent=4, sort_keys=True)
                         elif int(arguments["limit"][0]) > 310:
                             for i in range(0, 310):
                                 new_list.append(response_dict["species"][i]["common_name"])
                             context = {"Total_seq": count,
                                        "limit": arguments["limit"][0],
                                        "names_seq": new_list}
-                            contents = str(context)
+                            contents = json.dumps(context, indent=4, sort_keys=True)
                         else:
                             context = {"Total_seq": count,
                                        "limit": arguments["limit"][0],
                                        "names_seq": new_list}
-                            contents = str(context)
+                            contents = json.dumps(context, indent=4, sort_keys=True)
                     except KeyError:
                         context = {"Total_seq": count,
                                     "limit": "ERROR, you have to enter a limit",
                                     "names_seq": new_list}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 else:
                     content_type = "text/html"
                     try:
@@ -138,7 +138,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     context = {"Total_seq": count,
                                "limit": "ERROR, not valid limit",
                                "names_seq": new_list}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
                 else:
                     content_type = "text/html"
                     contents = read_template_html_file("./HTML/error_limit.html").render()
@@ -155,13 +155,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         content_type = "text/html"
                         response_dict = json.loads(response.read().decode())
                         context = {"Chromosome_names": response_dict["karyotype"]}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                     else:
                         context = {"Specie": "ERROR, not valid specie."}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 except KeyError:
                     context = {"Specie": "ERROR, enter a valid specie."}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 try:
@@ -192,17 +192,17 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         for d in new_list:
                             if d["name"] == arguments["chromo"][0]:
                                 context = {"Chromosome_length": d["length"]}
-                                contents = str(context)
+                                contents = json.dumps(context, indent=4, sort_keys=True)
                                 break
                             else:
                                 context = {"Chromosome_length": "ERROR, that chromosome wasn´t found."}
-                                contents = str(context)
+                                contents = json.dumps(context, indent=4, sort_keys=True)
                     else:
                         context = {"Specie": "ERROR, that specie wasn´t found."}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 except KeyError:
                     context = {"Specie": "ERROR, that specie wasn´t found."}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 try:
@@ -237,13 +237,13 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     if response.status == 200:
                         response_dict = json.loads(response.read().decode())
                         context = {"sequence": response_dict["seq"]}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                     else:
                         context = {"sequence": "ERROR, any sequence was found."}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 except KeyError:
                     context = {"human_gene": "ERROR, the gene you entered is not in our dictionary of human genes."}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 try:
@@ -276,12 +276,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         length_gene = int(info_data_gene[4]) - int(info_data_gene[3]) + 1
                         context = {"gene_name": gene, "start": info_data_gene[3], "end": info_data_gene[4],
                                    "length": length_gene, "id": id, "chromosome_name": info_data_gene[2]}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 except KeyError:
                     context = {"gene_name": "ERROR, the gene you entered is not in our dictionary of human genes.",
                                "start": "ERROR", "end": "ERROR",
                                "length": "ERROR", "id": "Not valid id.", "chromosome_name": "ERROR"}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 try:
@@ -315,12 +315,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                         percentages = sequence.percentage_base_and_count()
                         context = {"gene_name": gene, "total_length": sequence.len(), "A": percentages["A"], "C": percentages["C"],
                                    "G": percentages["G"], "T": percentages["T"]}
-                        contents = str(context)
+                        contents = json.dumps(context, indent=4, sort_keys=True)
                 except KeyError:
                     context = {"gene_name": "ERROR, the gene you entered is not in our dictionary of human genes.", "total_length": "ERROR", "A": "ERROR",
                                "C": "ERROR",
                                "G": "ERROR", "T": "ERROR"}
-                    contents = str(context)
+                    contents = json.dumps(context, indent=4, sort_keys=True)
             else:
                 content_type = "text/html"
                 try:

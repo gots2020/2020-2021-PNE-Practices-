@@ -2,23 +2,11 @@ import http.client
 import json
 
 
-def print_colored(message, data, color):
+def print_colored(message, color):
     from termcolor import cprint, colored
     print(colored(message, color), end="")
-    print(data)
 
-genes_dict = {
-    "FRAT1": "ENSG00000165879",
-    "ADA": "ENSG00000196839",
-    "FXN": "ENSG00000165060",
-    "RNU6_269P": "ENSG00000212379",
-    "MIR633": "ENSG00000207552",
-    "TTTY4C": "ENSG00000228296",
-    "RBMY2YP": "ENSG00000227633",
-    "FGFR3": "ENSG00000068078",
-    "KDR": "ENSG00000128052",
-    "ANK2": "ENSG00000145362"
-}
+
 
 PORT = 8080
 SERVER = '127.0.0.1'
@@ -35,16 +23,16 @@ list_endpoints = ["/?json=1", "/listSpecies?limit=4&json=1", "/listSpecies?limit
 
 for endpoint in list_endpoints:
     try:
-        print(f"Test for endpoint {endpoint}:\n")
+        print_colored(f"Test for endpoint {endpoint}:\n", "blue")
         conn.request("GET", endpoint)
     except ConnectionRefusedError:
-        print("ERROR! Cannot connect to the Server")
+        print_colored("ERROR! Cannot connect to the Server", "red")
         exit()
     r1 = conn.getresponse()
-    print(f"Response received!: {r1.status} {r1.reason}\n")
+    print_colored(f"Response received!: {r1.status} {r1.reason}\n", "green")
     data1 = r1.read().decode("utf-8")
-    json_string = json.dumps(data1)
-    json_dict = json.loads(json_string)
+    json_dict = json.loads(data1)
 
-    print(f"CONTENT:\n {json_dict}\n")
+
+    print_colored(f"CONTENT:\n {json_dict}\n\n", "yellow")
 

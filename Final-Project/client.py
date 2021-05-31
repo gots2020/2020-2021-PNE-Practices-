@@ -1,6 +1,6 @@
 import http.client
 import json
-import Seq1
+
 
 def print_colored(message, data, color):
     from termcolor import cprint, colored
@@ -27,7 +27,7 @@ print(f"\nConnecting to server: {SERVER}:{PORT}\n")
 
 conn = http.client.HTTPConnection(SERVER, PORT)
 try:
-    conn.request("GET", "/geneCalc?gene=FRAT2&json=0")
+    conn.request("GET", "/?json=1")
 except ConnectionRefusedError:
     print("ERROR! Cannot connect to the Server")
     exit()

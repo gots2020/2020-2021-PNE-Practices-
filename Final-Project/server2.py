@@ -58,8 +58,19 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         content_type = "text/html"
         context = {}
         if path_name == "/":
-            content_type = "text/html"
-            contents = read_template_html_file("./HTML/index.html").render()
+            if "json" in arguments.keys() and arguments["json"][0] == "1":
+                content_type = "application/json"
+                context = {"basic_level": ["1. List of species in the genome database",
+                                          "2. Information about the karyotype:",
+                                           "3. Chromosome Length"],
+                           "medium_level": ["4. Return the sequence of a human gene:",
+                                            "5. Return information about a human gene:",
+                                            "6. Total length and percentage of human gene bases:"]
+                           }
+                contents = str(context)
+            else:
+                content_type = "text/html"
+                contents = read_template_html_file("./HTML/index.html").render()
         elif path_name == "/listSpecies":
             try:
                 ENDPOINT = "/info/species"

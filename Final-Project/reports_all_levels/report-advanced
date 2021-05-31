@@ -3,6 +3,21 @@ ADVANCED LEVEL REPORT
 -----------------------
 
 
+------> index
+
+* TEST 1:
+
+- Input:
+
+http://127.0.0.1:8080/?json=1
+
+- Output:
+
+CONTENT:
+{'basic_level': ['1. List of species in the genome database', '2. Information about the karyotype:', '3. Chromosome Length'], 'medium_level': ['4. Return the sequence of a human gene:', '5. Return information about a human gene:', '6. Total length and percentage of human gene bases:']}
+
+
+
 ------> listSpecies endpoint
 
 * TEST 1:

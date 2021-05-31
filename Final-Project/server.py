@@ -144,7 +144,7 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
                     contents = read_template_html_file("./HTML/error_limit.html").render()
 
         elif path_name == "/karyotype":
-            if "json" in arguments.keys() and arguments["json"] == 1:
+            if "json" in arguments.keys() and arguments["json"][0] == "1":
                 content_type = "application/json"
                 try:
                     specie = arguments["specie"][0].replace(" ", "_")

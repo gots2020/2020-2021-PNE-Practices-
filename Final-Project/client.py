@@ -20,27 +20,22 @@ genes_dict = {
     "ANK2": "ENSG00000145362"
 }
 
-SERVER = "rest.ensembl.org"
-ENDPOINT = "/sequence/id/"
-PARAMETERS = "?content-type=application/json"
+PORT = 8080
+SERVER = '127.0.0.1'
 
-connection = http.client.HTTPConnection(SERVER)
+print(f"\nConnecting to server: {SERVER}:{PORT}\n")
+
+conn = http.client.HTTPConnection(SERVER, PORT)
 try:
-    for key, ID in genes_dict.items():
-        connection.request("GET", ENDPOINT + ID + PARAMETERS)
-        response = connection.getresponse()
-        if response.status == 200:
-            response_dict = json.loads(response.read().decode())
-            #response = json.dumps(response_dict, indent=4, sort_keys=True
-            sequence = Seq1.Seq(response_dict["seq"])
-            s_length = sequence.len()
-            percentages = sequence.percentage_base_and_count()
-            most_frequent_base = sequence.frequency_base()
-            print_colored("Gene: ", key, "yellow")
-            print_colored("Description: ", response_dict['desc'], "yellow")
-            print_colored("Total length: ", s_length, "yellow")
-            for key, value in percentages.items():
-                print_colored(key, value, "blue")
-            print_colored("Most frequent base: ", most_frequent_base, "yellow")
-except KeyError:
-    print("The gene is not inside our dictionary. Choose one of the following: ", list(genes_dict.keys()))
+    conn.request("GET", "/geneCalc?gene=FRAT2&json=0")
+except ConnectionRefusedError:
+    print("ERROR! Cannot connect to the Server")
+    exit()
+r1 = conn.getresponse()
+print(f"Response received!: {r1.status} {r1.reason}\n")
+data1 = r1.read().decode("utf-8")
+json_string = json.dumps(data1)
+json_dict = json.loads(json_string)
+
+print(f"CONTENT:\n {json_dict}")
+

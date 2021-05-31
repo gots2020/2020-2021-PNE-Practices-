@@ -55,7 +55,6 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
         SERVER = "rest.ensembl.org"
         PARAMETERS = "?content-type=application/json"
         connection = http.client.HTTPConnection(SERVER)
-
         context = {}
         if path_name == "/":
             contents = read_template_html_file("./HTML/index.html").render()
@@ -99,8 +98,12 @@ class TestHandler(http.server.BaseHTTPRequestHandler):
             connection.request("GET", ENDPOINT + PARAMETERS)
             response = connection.getresponse()
             if response.status == 200:
+                content_type = "text/html"
                 response_dict = json.loads(response.read().decode())
                 context = {"Chromosome_names": response_dict["karyotype"]}
+                if "json" in arguments.keys() and arguments["json"] == 1:
+                    content_type = "application/json"
+                    contents = str(context)
                 contents = read_template_html_file("./HTML/karyotype.html").render(context=context)
             else:
                 contents = read_template_html_file("./HTML/error_specie.html").render()

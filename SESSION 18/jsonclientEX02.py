@@ -3,7 +3,7 @@ import json
 import termcolor
 
 PORT = 8080
-SERVER = 'localhost'
+SERVER = '127.0.0.1'
 print(f"\nConnecting to server: {SERVER}:{PORT}\n")
 
 # Connect with the server

@@ -108,6 +108,7 @@ class Seq:
         self.strbases = Seq.take_out_first_line(Path(filename).read_text())
         return self.strbases
 
+
     def frequency_base(self):
         a, c, g, t = 0, 0, 0, 0
         for e in self.strbases:
